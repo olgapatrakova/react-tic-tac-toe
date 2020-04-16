@@ -6,7 +6,18 @@ import PropTypes from 'prop-types';
 
 const generateSquareComponents = (squares, onClickCallback) => {
   // Complete this for Wave 1
-
+  return squares.map((row) => {
+    return row.map((cell) => {
+      return (
+        <Square
+          key={cell.id}
+          value={cell.value}
+          id={cell.id}
+          onClickCallback={onClickCallback}
+        />
+      );
+    });
+  });
 }
 
 const Board = ({ squares, onClickCallback }) => {
@@ -25,7 +36,7 @@ Board.propTypes = {
         value: PropTypes.string.isRequired
       })
     )
-  ),
+    ),
   onClickCallback: PropTypes.func.isRequired,
 };
 
