@@ -76,15 +76,20 @@ const App = () => {
     // Iterate over the winning indexes and check if there is a winning combination in the current squares values
     // Flatten the current squares array
     let flattenedSquares = squares.flat();
-    console.log('flattenedSquares', flattenedSquares);
     for (let i = 0; i < winningIndexes.length; i++) {
       // Array destructuring, abc store indexes
       const [a, b, c] = winningIndexes[i];
       if (flattenedSquares[a].value && flattenedSquares[a].value ===  flattenedSquares[b].value && flattenedSquares[a].value === flattenedSquares[c].value) {
-        setWinner(flattenedSquares[a].value);
-      }
-    }
-    // setWinner(undefined);
+        setWinner(`The winner is ${flattenedSquares[a].value.toUpperCase()}`);
+      };
+    };
+    let noValueSquare = 0;
+    for (let square of flattenedSquares) {
+      if (square.value === '') {
+        noValueSquare++
+      };
+    };
+    if (noValueSquare === 0) {setWinner('No winner!')}
   };    
 
   const resetGame = () => {
@@ -95,7 +100,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is {winner} </h2>
+        <h2>{winner} </h2>
         <button>Reset Game</button>
       </header>
       <main>
