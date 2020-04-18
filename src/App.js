@@ -81,6 +81,7 @@ const App = () => {
       const [a, b, c] = winningIndexes[i];
       if (flattenedSquares[a].value && flattenedSquares[a].value === flattenedSquares[b].value && flattenedSquares[a].value === flattenedSquares[c].value) {
         setWinner(`The winner is ${flattenedSquares[a].value.toUpperCase()}`);
+        return;
       };
     };
     // Make sure there are some empty squares. If none, display 'No winner'
