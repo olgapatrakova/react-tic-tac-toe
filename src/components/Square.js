@@ -8,23 +8,18 @@ const Square = (props) => {
   //  Component to alert a parent 
   //  component when it's clicked on.
 
-  const onClickCallback = () => { // How we switch from X to O
-  //   const updatedSquare = {
-  //     value: !props.value,
-  //     id: props.id,
-  //     onClickCallback: onClickCallback,
-  //   }
-
-  //   // Send the new updated square back to App.js
-  //   // call the function passed from `App`
-    props.onClickCallback(props.id);
+  const onSquareClick = () => {
+    // call the function passed from `App` if the square value is ''
+    // do nothing if there is already some value
+    if (props.value === '') {
+      props.onClickCallback(props.id);
+    };
   };
- 
 
 
   return <button
     className="square"
-    onClick={onClickCallback}
+    onClick={onSquareClick} 
   >
     {props.value} {/* Text of the button */}
   </button>

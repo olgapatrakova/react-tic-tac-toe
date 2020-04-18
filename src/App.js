@@ -41,6 +41,7 @@ const App = () => {
     for (let row of squares) {
       const new_row = [];
       for (let square of row) {
+        // Update the value of a square if its id is the same as the passed id from the 'Square' component
         if (square.id === id) {
           let updatedSquare = square;
           updatedSquare.value = itsXTurn ? PLAYER_1 : PLAYER_2;
@@ -51,7 +52,6 @@ const App = () => {
       };
       squaresList.push(new_row);
     };
-    console.log("setnewstate", squaresList);
     setSquares(squaresList);
     takeTurns();
   };
@@ -73,7 +73,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onSquareClick={onClickCallback} /> {/* Squares are passed as props to Board */}
+        <Board squares={squares} onClickCallback={onClickCallback} /> {/* Squares and function are passed as props to Board */}
       </main>
     </div>
   );
