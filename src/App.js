@@ -73,7 +73,7 @@ const App = () => {
       [0, 4, 8],
       [2, 4, 6]
     ];
-    // Iterate over the winning indexes and check if there is a winning combination in the current squares values
+    // Iterate over the winning indexes and check if there is a winning combination in the current square indexes with values
     // Flatten the current squares array
     let flattenedSquares = squares.flat();
     for (let i = 0; i < winningIndexes.length; i++) {
@@ -83,6 +83,7 @@ const App = () => {
         setWinner(`The winner is ${flattenedSquares[a].value.toUpperCase()}`);
       };
     };
+    // Make sure there are some empty squares. If none, display 'No winner'
     let noValueSquare = 0;
     for (let square of flattenedSquares) {
       if (square.value === '') {

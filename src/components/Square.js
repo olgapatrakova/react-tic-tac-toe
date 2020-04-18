@@ -10,8 +10,7 @@ const Square = (props) => {
 
   const onSquareClick = () => {
     // call the function passed from `App` if the square value is ''
-    // do nothing if there is already some value
-    console.log("onSquareClick", props)
+    // do nothing if there is already some value or the winner is found
     if (props.value === '' && !props.winner) {
       props.onClickCallback(props.id);
     };
