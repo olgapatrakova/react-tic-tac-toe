@@ -5,6 +5,7 @@ import Board from './components/Board';
 const PLAYER_1 = 'X';
 const PLAYER_2 = 'O';
 
+
 const generateSquares = () => {
   const squares = [];
 
@@ -27,10 +28,13 @@ const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
   const [itsXTurn, setXTurn] = useState(true);
+  const [winner, setWinner] = useState(undefined)
 
   const takeTurns = () => {
     setXTurn(!itsXTurn);
   };
+
+  
 
   // Wave 2
   // You will need to create a method to change the square 
@@ -54,26 +58,48 @@ const App = () => {
     };
     setSquares(squaresList);
     takeTurns();
+    checkForWinner();
   };
 
   const checkForWinner = () => {
     // Complete in Wave 3
-
-  }
+    const winningIndexes = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+    // Iterate over the winning indexes and check if there is a winning combination in the current squares values
+    // Flatten the current squares array
+    let flattenedSquares = squares.flat();
+    console.log('flattenedSquares', flattenedSquares);
+    for (let i = 0; i < winningIndexes.length; i++) {
+      // Array destructuring, abc store indexes
+      const [a, b, c] = winningIndexes[i];
+      if (flattenedSquares[a].value && flattenedSquares[a].value ===  flattenedSquares[b].value && flattenedSquares[a].value === flattenedSquares[c].value) {
+        setWinner(flattenedSquares[a].value);
+      }
+    }
+    // setWinner(undefined);
+  };    
 
   const resetGame = () => {
     // Complete in Wave 4
-  }
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... -- Fill in for wave 3 </h2>
+        <h2>The winner is {winner} </h2>
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={onClickCallback} /> {/* Squares and function are passed as props to Board */}
+        <Board squares={squares} onClickCallback={onClickCallback} winner={winner}/> {/* Squares and function are passed as props to Board */}
       </main>
     </div>
   );
