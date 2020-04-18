@@ -79,7 +79,7 @@ const App = () => {
     for (let i = 0; i < winningIndexes.length; i++) {
       // Array destructuring, abc store indexes
       const [a, b, c] = winningIndexes[i];
-      if (flattenedSquares[a].value && flattenedSquares[a].value ===  flattenedSquares[b].value && flattenedSquares[a].value === flattenedSquares[c].value) {
+      if (flattenedSquares[a].value && flattenedSquares[a].value === flattenedSquares[b].value && flattenedSquares[a].value === flattenedSquares[c].value) {
         setWinner(`The winner is ${flattenedSquares[a].value.toUpperCase()}`);
       };
     };
@@ -95,6 +95,10 @@ const App = () => {
 
   const resetGame = () => {
     // Complete in Wave 4
+    setWinner(undefined);
+    setXTurn(true);
+    let squares = generateSquares();
+    setSquares(squares);
   };
 
   return (
@@ -102,7 +106,7 @@ const App = () => {
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
         <h2>{winner} </h2>
-        <button>Reset Game</button>
+        <button onClick={resetGame}> Reset Game </button>
       </header>
       <main>
         <Board squares={squares} onClickCallback={onClickCallback} winner={winner}/> {/* Squares and function are passed as props to Board */}
