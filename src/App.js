@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import Board from './components/Board';
 
 const PLAYER_1 = 'X';
@@ -19,21 +18,43 @@ const generateSquares = () => {
         value: '',
       });
       currentId += 1;
-    }
-  }
-
+    };
+  };
   return squares;
 }
 
 const App = () => {
 
   const [squares, setSquares] = useState(generateSquares());
+  const [itsXTurn, setXTurn] = useState(true);
+
+  const takeTurns = () => {
+    setXTurn(!itsXTurn);
+  };
 
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
-
+  const onClickCallback = (id) => {
+    const squaresList = [];
+    for (let row of squares) {
+      const new_row = [];
+      for (let square of row) {
+        if (square.id === id) {
+          let updatedSquare = square;
+          updatedSquare.value = itsXTurn ? PLAYER_1 : PLAYER_2;
+          new_row.push(updatedSquare);
+        } else {
+          new_row.push(square)
+        };
+      };
+      squaresList.push(new_row);
+    };
+    console.log("setnewstate", squaresList);
+    setSquares(squaresList);
+    takeTurns();
+  };
 
   const checkForWinner = () => {
     // Complete in Wave 3
@@ -52,7 +73,7 @@ const App = () => {
         <button>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} />
+        <Board squares={squares} onSquareClick={onClickCallback} /> {/* Squares are passed as props to Board */}
       </main>
     </div>
   );
